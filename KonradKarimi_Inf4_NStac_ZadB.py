@@ -54,11 +54,11 @@ def getImgInfo(img, original: bool):
     return np.min(img), np.max(img), np.average(img)
 
 
-def correction(pxl, pxl_min, pxl_max):
-    r = 255.0/(pxl_max-pxl_min+2)
-    corrected_image = np.round(
-        r*np.where(pxl >= pxl_min, pxl - pxl_max+1, 0)).clip(max=255)
-    return corrected_image.astype(np.int_)
+def correction(img, pxl_min, pxl_max):
+    r = 255/(pxl_max-pxl_min)
+    corrected_img = np.round(
+        r*np.where(img >= pxl_min, img-pxl_min, 0)).clip(max=255)
+    return corrected_img.astype(np.int_)
 
 
 def saveNewImage(img):
@@ -70,15 +70,16 @@ def main(argv):
 
     orginal_img = loadImage(FLAGS.path_to_image)
     enhanced_img = increaseBrightness(orginal_img, FLAGS.brightness)
+
     orginal_min, orginal_max, orginal_avg = getImgInfo(orginal_img, True)
     enhanced_min, enhanced_max, enhanced_avg = getImgInfo(enhanced_img, False)
 
-    new = enhanced_img
-    displayImg(new)
-    new = correction(enhanced_img, enhanced_min, enhanced_max)
-    displayImg(new)
+    displayImg(enhanced_img)
 
-    saveNewImage(new)
+    corrected_img = correction(enhanced_img, enhanced_min, enhanced_max)
+    displayImg(corrected_img)
+
+    saveNewImage(corrected_img)
 
 
 if __name__ == '__main__':
