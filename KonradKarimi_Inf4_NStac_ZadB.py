@@ -18,7 +18,7 @@ def loadImage(path_to_image):
     logging.info("Loading image from: %s", path_to_image)
     img = mpimg.imread(path_to_image)
     # Color sheme RGBA probably?? - so we need to remove Alpha to not mess calculation in the future
-    # img = img[:, :, :3]
+    img = img[:, :, :3]
     return img.astype(np.int_)
 
 
@@ -34,7 +34,9 @@ def displayImg(img):
     logging.info("Displaying image")
     plt.imshow(img)
     plt.axis("off")
+    logging.info("\nTo continue please close preview window!")
     plt.show()
+
 
 
 def getImgInfo(img, original: bool):
@@ -62,6 +64,7 @@ def correction(img, pxl_min, pxl_max):
 
 
 def saveNewImage(img):
+    # for some reason it wants uint8 to save file
     mpimg.imsave("new_file_out.GIF", img.astype(np.uint8))
 
 
