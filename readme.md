@@ -76,4 +76,4 @@ python KonradKarimi_Inf4_NStac_ZadB.py --path_to_image="./son1.GIF" --brightness
 
 * **Konrad Karimi** - [KonradKarimi](https://github.com/KonradKarimi)
 
-See also the list of [contributors](https://github.com/your/project/contributors) who participated in this project.
+See also the list of [contributors](https://github.com/KonradKarimi/ImageProcessing/contributors) who participated in this project.
